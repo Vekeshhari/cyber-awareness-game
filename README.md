@@ -1,36 +1,156 @@
-# React + Vite
+# Cyber Awareness Game
 
-## Backend
+A story-driven cybersecurity learning game built with React, Vite, and Express. Players navigate simulated cyberattack scenarios, learn about phishing, scams, password hygiene, privacy, and safe digital behavior, and track progress through rankings and streaks.
 
-The server requires separate `JWT_SECRET` and `VAULT_ENCRYPTION_KEY` environment variables. Generate a different random value for each with:
+## Overview
+
+This project combines interactive gameplay, educational content, and backend user tracking to teach cyber awareness in a hands-on way. It includes:
+
+- story-based cyber safety missions
+- login and registration flows
+- user progress tracking
+- password vault for secure credential practice
+- security quizzes and learning modules
+- streak and ranking features
+- scam simulation scenarios
+
+## Tech Stack
+
+- Frontend: React + Vite
+- Backend: Node.js + Express
+- Database: MongoDB with Mongoose
+- Authentication: JWT
+- Encryption: AES-256-GCM for vault data
+- Styling: custom React UI and CSS
+
+## Project Structure
+
+```text
+cyber-awareness-game/
+├── public/
+├── server/
+│   ├── config/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   ├── package.json
+│   └── server.js
+├── src/
+│   ├── components/
+│   ├── data/
+│   ├── pages/
+│   ├── utils/
+│   ├── App.jsx
+│   └── main.jsx
+├── .gitignore
+├── package.json
+├── vite.config.js
+├── index.html
+├── README.md
+└── eslint.config.js
+```
+
+## Prerequisites
+
+Before running the project, make sure you have:
+
+- Node.js 18+
+- npm
+- MongoDB running locally on `mongodb://localhost:27017/cyberverse`
+
+## Quick Start
+
+### 1. Install frontend dependencies
+
+```powershell
+npm install
+```
+
+### 2. Install backend dependencies
+
+```powershell
+cd server
+npm install
+cd ..
+```
+
+### 3. Set environment variables
+
+Generate a strong secret for each variable:
 
 ```powershell
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
-In PowerShell, set the generated value for the current session before starting the server:
+Set them in your current PowerShell session:
 
 ```powershell
-$env:JWT_SECRET = "<generated-secret>"
-$env:VAULT_ENCRYPTION_KEY = "<different-generated-secret>"
+$env:JWT_SECRET = "<your-jwt-secret>"
+$env:VAULT_ENCRYPTION_KEY = "<64-character-hex-key>"
+```
+
+> `VAULT_ENCRYPTION_KEY` must be a 64-character hexadecimal string. Keep it secure; if it is lost, newly encrypted vault entries cannot be recovered.
+
+### 4. Start MongoDB
+
+Make sure MongoDB is running locally before starting the server.
+
+### 5. Start the backend
+
+```powershell
 cd server
-npm install
 node server.js
 ```
 
-The vault key must be 64 hexadecimal characters. Back it up securely: losing it makes newly encrypted vault entries unrecoverable. Set both variables in your deployment environment and never commit either secret.
+### 6. Start the frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Open a new terminal in the project root and run:
 
-Currently, two official plugins are available:
+```powershell
+npm run dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Then open the local Vite URL in your browser, typically:
 
-## React Compiler
+```text
+http://localhost:5173
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Environment Variables
 
-## Expanding the ESLint configuration
+This project expects the following variables at runtime:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `JWT_SECRET`: used to sign and verify JWTs for authenticated routes
+- `VAULT_ENCRYPTION_KEY`: used to encrypt and decrypt stored vault passwords
+
+These values should be provided by your deployment platform or local environment only. Never commit them to Git.
+
+## Security Notes
+
+- `.env*` files are ignored by Git.
+- Do not commit secrets or tokens.
+- Update secrets in deployment environments, not in source code.
+- The app stores encrypted passwords in the vault, but the security keys must be managed carefully.
+
+## Features in Brief
+
+- cyber crime awareness learning modules
+- scenario-based decision making
+- user authentication and tracking
+- leaderboard and streak mechanics
+- secure password vault concept for practice
+- educational content on phishing, scams, shoulder surfing, password security, and privacy
+
+## License
+
+This project is distributed under the ISC license as defined in the package configuration.
+
+## Contributing
+
+Contributions are welcome. If you want to improve gameplay, add educational content, or polish the security flows, open an issue or submit a pull request.
+
+## Project Status
+
+This project is actively used as a cybersecurity awareness game and is suitable for educational demos, workshops, and learning labs.
+
